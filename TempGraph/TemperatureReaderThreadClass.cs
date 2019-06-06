@@ -33,6 +33,8 @@ namespace TempGraph
 {
     class TemperatureReaderThreadClass
     {
+        private bool Debug;
+
         private const int YScale = 4;
 
         private const int YOffset = 70;
@@ -47,6 +49,7 @@ namespace TempGraph
 
         public TemperatureReaderThreadClass(Panel panel)
         {
+            Debug = false;
             this.panel = panel;
             pointCollection = new PointCollection();
             polyLine = null;
@@ -64,19 +67,27 @@ namespace TempGraph
 
         private int NextTemp()
         {
-            //return 72;
-            try
-            {
-                using (var webClient = new WebClient())
-                {
-                    var result = webClient.DownloadString($"http://192.168.1.51:1501/");
-                    var temp = JsonConvert.DeserializeObject<TemperatureClass>(result);
-                    return (int)(temp.Temperature + 0.5);
-                }
-            }
-            catch (Exception)
+            if (Debug)
             {
                 return 72;
+            }
+            else
+            {
+                var probeIP = Properties.Settings.Default.ProbeIpAddr;
+                var probePort = Properties.Settings.Default.ProbeIpPort;
+                try
+                {
+                    using (var webClient = new WebClient())
+                    {
+                        var result = webClient.DownloadString($"http://{probeIP}:{probePort}");
+                        var temp = JsonConvert.DeserializeObject<TemperatureClass>(result);
+                        return (int)(temp.Temperature + 0.5);
+                    }
+                }
+                catch (Exception)
+                {
+                    return 72;
+                }
             }
         }
 
@@ -149,8 +160,14 @@ namespace TempGraph
             {
                 panel.Dispatcher.Invoke(InsertNextTemp);
 
-                Thread.Sleep(10 * 1000);
-                //Thread.Sleep(25);
+                if (Debug)
+                {
+                    Thread.Sleep(25);
+                }
+                else
+                {
+                    Thread.Sleep(10 * 1000);
+                }
             }
 
         }

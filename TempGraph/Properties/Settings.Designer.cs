@@ -22,5 +22,23 @@ namespace TempGraph.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.51")]
+        public string ProbeIpAddr {
+            get {
+                return ((string)(this["ProbeIpAddr"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1501")]
+        public int ProbeIpPort {
+            get {
+                return ((int)(this["ProbeIpPort"]));
+            }
+        }
     }
 }
