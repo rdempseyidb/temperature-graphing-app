@@ -79,7 +79,7 @@ namespace TempGraph
                 {
                     using (var webClient = new WebClient())
                     {
-                        var result = webClient.DownloadString($"http://{probeIP}:{probePort}");
+                        var result = webClient.DownloadString($"http://{probeIP}:{probePort}/");
                         var temp = JsonConvert.DeserializeObject<TemperatureClass>(result);
                         return (int)(temp.Temperature + 0.5);
                     }
