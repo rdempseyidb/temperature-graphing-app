@@ -29,7 +29,7 @@ using System.Threading;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace WpfApp1
+namespace TempGraph
 {
     class TemperatureReaderThreadClass
     {

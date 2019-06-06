@@ -34,7 +34,7 @@ using System.Net;
 using Newtonsoft.Json;
 using System.Threading;
 
-namespace WpfApp1
+namespace TempGraph
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

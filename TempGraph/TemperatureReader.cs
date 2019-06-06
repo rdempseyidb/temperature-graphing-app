@@ -23,7 +23,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 
-namespace WpfApp1
+namespace TempGraph
 {
     class TemperatureReader
     {
